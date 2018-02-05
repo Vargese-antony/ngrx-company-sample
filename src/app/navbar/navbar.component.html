@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/welcome']">
+    <img src="/assets/ngrx.png" width="30" height="30" alt="">
+    Home
+  </a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="navbar-item">
+        <a class="nav-link" [routerLink]="['/company/list']">All Companies</a>
+      </li>
+      <li class="navbar-item">
+        <a class="nav-link" [routerLink]="['/company/add']">Add</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
