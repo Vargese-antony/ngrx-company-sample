@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
   CompanyListComponent,
+  CompanyListResolveService,
   CompanyAddComponent,
-  CompanyDeleteComponent
+  CompanyDetailResolveService
 } from './index';
 
 const routes: Routes = [
-  { path: 'list', component : CompanyListComponent},
+  { path: 'list', resolve : {companyListFromResolve: CompanyListResolveService}, component : CompanyListComponent},
   { path: 'add', component : CompanyAddComponent},
-  { path: 'delete', component : CompanyDeleteComponent},
-  { path: 'edit', component : CompanyAddComponent}
+  { path: 'edit/:id', resolve : {companyDetailFromResolve : CompanyDetailResolveService}, component : CompanyAddComponent}
 ];
 
 @NgModule({
   imports: [
-    CommonModule,
     RouterModule.forChild(routes)
   ],
-  declarations: []
+  declarations: [],
+  exports : [RouterModule]
 })
 export class CompanyRoutingModule { }

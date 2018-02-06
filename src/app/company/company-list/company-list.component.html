@@ -1,3 +1,23 @@
-<p>
-  company-list works!
-</p>
+<div class="container">
+  <h1>Company List</h1>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of companies$ | async">
+        <td>{{company.name}}</td>
+        <td>{{company.email}}</td>
+        <td>{{company.phone}}</td>
+        <td style="width:1%">
+          <button type="button" class="btn btn-secondary" [routerLink]="['/company/edit',company.id]">Edit</button>
+        </td>
+        <td style="width:1%">
+            <button type="button" class="btn btn-danger" (click)="onDelete(company.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
