@@ -9,7 +9,7 @@ import {
 } from './index';
 
 const routes: Routes = [
-  { path: 'list', resolve : {companyListFromResolve: CompanyListResolveService}, component : CompanyListComponent},
+  { path: 'list', component : CompanyListComponent},
   { path: 'add', component : CompanyAddComponent},
   { path: 'edit/:id', resolve : {companyDetailFromResolve : CompanyDetailResolveService}, component : CompanyAddComponent}
 ];

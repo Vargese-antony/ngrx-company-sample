@@ -1,13 +1,19 @@
+// Angular imports
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import 'rxjs/add/operator/do';
-import 'rxjs/add/observable/of';
-
+// Rxjs imports
 import { Observable } from 'rxjs/Observable';
 
+// Ngrx imports
+import { Store } from '@ngrx/store';
+
+// Application imports
 import { ICompany } from '../company.modal';
-import { CompanyService } from '../company.service';
+import * as CompanyState from '../../state-management/states/company.state';
+import * as CompanyActions from '../../state-management/actions/company.actions';
+import { AppStates  } from '../../state-management/states/app.state';
+import { DeleteCompanyAction } from '../../state-management/actions/company.actions';
 
 @Component({
   selector: 'app-company-list',
@@ -20,23 +26,19 @@ export class CompanyListComponent implements OnInit {
   constructor(
       private _activatedRoute: ActivatedRoute,
       private _router: Router,
-      private _companyService: CompanyService
+      private _store: Store<AppStates>
     ) { }
 
   ngOnInit() {
-    // this.companies = this._activatedRoute.snapshot.data['companyListFromResolve'];
-    this._activatedRoute.data.forEach( data => {
-      this.companies$ = Observable.of(data['companyListFromResolve']);
-      console.log('ngOnInit', this.companies$);
-      //console.log('Inside ngOnInit');
-    });
+    this.loadCompanies();
+    this.companies$ = this._store.select(state => state.companyState.companies);
+  }
+
+  loadCompanies() {
+    this._store.dispatch(new CompanyActions.LoadCompaniesAction());
   }
 
   onDelete(id: number) {
-    this._companyService.deleteCompany(id)
-      .subscribe( res => {
-        console.log('Company deleted');
-        // this._router.navigate(['/company/list']);
-      });
+    this._store.dispatch(new DeleteCompanyAction(id));
   }
 }

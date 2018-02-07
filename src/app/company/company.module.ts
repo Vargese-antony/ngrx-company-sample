@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+// Ngrx imports
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { companyReducers } from '../state-management/reducers/company.reducer';
+import { CompanyEffects } from '../state-management/effects/company.effects';
+
 import {
   CompanyListComponent,
   CompanyAddComponent
@@ -15,7 +21,9 @@ import { CompanyDetailResolveService } from './company-add/company-detail-resolv
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    CompanyRoutingModule
+    CompanyRoutingModule,
+    StoreModule.forRoot(companyReducers),
+    EffectsModule.forRoot([CompanyEffects])
   ],
   declarations: [
     CompanyListComponent,
